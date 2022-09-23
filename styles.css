@@ -334,9 +334,10 @@ form textarea{
 	font-weight: 500;
 	background: var(--main-color);
 	color: var(--text-color);
-	width: 190px;
+	width: 150px;
 	transition: all .40s ease;
 	cursor: pointer;
+	height: 50px;
 }
 @media (max-width: 1325px){
 	header{
