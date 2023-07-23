@@ -52,7 +52,7 @@
     <!-- About -->
     <section class="about" id="about">
       <div class="about-img">
-        <img src="image/about.png" alt="" />
+        <img src="image/simple2.png" alt="" />
       </div>
       <div class="about-text">
         <h2>About Me</h2>
@@ -228,7 +228,7 @@
         </div>
       </div>
 
-      <div class="contact-form">
+      <!-- <div class="contact-form">
         <form action="">
           <input type="" placeholder="Enter Your Name" required>
           <input type="email" placeholder="Enter Your Email" required>
@@ -236,7 +236,16 @@
           <textarea name="" id="" cols="40" rows="10" placeholder="Enter Your Message" required></textarea>
           <button type="submit" class="send"><a href="https://mail.google.com/mail/u/0/#inbox?compose=new">send</a></button>
         </form>
-      </div>
+      </div> -->
+      <div class="contact-form">
+        <form action="/api/submitForm" method="post">
+            <input type="text" name="name" placeholder="Enter Your Name" required>
+            <input type="email" name="email" placeholder="Enter Your Email" required>
+            <input type="text" name="subject" placeholder="Enter Your Subject">
+            <textarea name="message" cols="40" rows="10" placeholder="Enter Your Message" required></textarea>
+            <button type="submit" class="send">Send</button>
+        </form>
+    </div>
     </section>
     
     <script src="https://unpkg.com/scrollreveal"></script>
