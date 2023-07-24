@@ -1,70 +1,85 @@
 const header = document.querySelector("header");
 
-window.addEventListener ("scroll", function() {
-	header.classList.toggle ("sticky", window.scrollY >0);
+window.addEventListener("scroll", function () {
+  header.classList.toggle("sticky", window.scrollY > 0);
 });
 
 let menu = document.querySelector('#menu-icon');
 let navbar = document.querySelector('.navbar');
 
 menu.onclick = () => {
-	menu.classList.toggle('bx-x');
-	navbar.classList.toggle('active');
+  menu.classList.toggle('bx-x');
+  navbar.classList.toggle('active');
 };
 
 window.onscroll = () => {
-	menu.classList.remove('bx-x');
-	navbar.classList.remove('active');
+  menu.classList.remove('bx-x');
+  navbar.classList.remove('active');
 };
 
-const sr = ScrollReveal ({
-	distance: '25px',
-	duration: 2500,
-	reset: true
+const sr = ScrollReveal({
+  distance: '25px',
+  duration: 2500,
+  reset: true
 })
 
-sr.reveal('.home-text',{delay:190, origin:'bottom'})
+sr.reveal('.home-text', { delay: 190, origin: 'bottom' })
 
-sr.reveal('.about,.services,.portfolio,.contact',{delay:200, origin:'bottom'})
+sr.reveal('.about,.services,.portfolio,.contact', { delay: 200, origin: 'bottom' })
 
-// doflf
-const nodemailer = require("nodemailer");
+// Sendmail function
 
-exports.handler = async (event) => {
-  const { name, email, subject, message } = JSON.parse(event.body);
+function sendMail(event) {
+  event.preventDefault(); // Prevent default form submission behavior
 
-  // Setup the email transport
-  const credentials = process.env.GMAIL_CREDENTIALS.split(':');
-  const transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 587,
-    secure: false,
-    auth: {
-      user: credentials[0], // Extract the username
-      pass: credentials[1], // Extract the password
-    },
-  });
+  var params = {
+    name: document.getElementById("name").value,
+    email: document.getElementById("email").value,
+    subject: document.getElementById("subject").value,
+    message: document.getElementById("message").value,
+  };
 
-  try {
-    // Send the email
-    await transporter.sendMail({
-      from: email,
-      to: "portfolio.web87@gmail.com", // Replace with your email address
-      subject: subject,
-      text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
+  const serviceID = "service_2qp66xt";
+  const templateID = "template_zijm1zk";
+
+  emailjs
+    .send(serviceID, templateID, params)
+    .then((res) => {
+      document.getElementById("name").value = "";
+      document.getElementById("email").value = "";
+      document.getElementById("subject").value = ""; // Fix: Added .value
+      document.getElementById("message").value = "";
+
+      console.log(res);
+      alert("Your message sent successfully!!");
+    })
+    .catch((err) => {
+      console.log(err);
+      alert("An error occurred while sending the message. Please try again.");
     });
+}
 
-    return {
-      statusCode: 200,
-      body: "Email sent successfully!",
-    };
-  } catch (error) {
-    console.error(error);
+//copy clip board email function
+document.getElementById('emailLink').addEventListener('click', function(event) {
+  event.preventDefault();
+  var email = this.textContent.trim();
+  copyToClipboard(email);
+  showAlert('Email copied to clipboard!');
+});
 
-    return {
-      statusCode: 500,
-      body: "Failed to send the email. Please try again later.",
-    };
-  }
-};
+function copyToClipboard(text) {
+  var textArea = document.createElement('textarea');
+  textArea.value = text;
+  textArea.style.position = 'fixed';
+  document.body.appendChild(textArea);
+  textArea.select();
+  document.execCommand('copy');
+  document.body.removeChild(textArea);
+}
+
+function showAlert(message) {
+  alert(message);
+}
+
+// scrolling function
 
