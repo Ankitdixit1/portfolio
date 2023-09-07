@@ -82,10 +82,10 @@ function showAlert(message) {
 }
 
 // scrolling function
-const wrapper = document.querySelector(".wrapper");
-const carousel = document.querySelector(".carousel");
-const firstCardWidth = carousel.querySelector(".card").offsetWidth;
-const arrowBtns = document.querySelectorAll(".wrapper i");
+const wrapper = document.querySelector(".wrapper",".wrapper1");
+const carousel = document.querySelector(".carousel",".carousel1");
+const firstCardWidth = carousel.querySelector(".card",".card1").offsetWidth;
+const arrowBtns = document.querySelectorAll(".wrapper i",".wrapper1 i");
 const carouselChildrens = [...carousel.children];
 
 let isDragging = false, isAutoPlay = true, startX, startScrollLeft, timeoutId;
@@ -113,6 +113,12 @@ arrowBtns.forEach(btn => {
     btn.addEventListener("click", () => {
         carousel.scrollLeft += btn.id == "left" ? -firstCardWidth : firstCardWidth;
     });
+});
+
+arrowBtns.forEach(btn => {
+  btn.addEventListener("click", () => {
+      carousel.scrollLeft += btn.id == "fold" ? -firstCardWidth : firstCardWidth;
+  });
 });
 
 const dragStart = (e) => {
