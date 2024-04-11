@@ -27,6 +27,25 @@ sr.reveal('.home-text', { delay: 190, origin: 'bottom' })
 
 sr.reveal('.about,.services,.portfolio,.contact,.scrolling', { delay: 200, origin: 'bottom' })
 
+// animation from left side about section img
+document.addEventListener('scroll', function() {
+  var scrollPosition = window.scrollY;
+  var container = document.querySelector('.about-img');
+  var containerPosition = container.offsetTop;
+  var windowHeight = window.innerHeight; 
+
+  if (scrollPosition + windowHeight > containerPosition) {
+    container.classList.add('animate');
+  }
+});
+
+// animation home righ side
+document.addEventListener('DOMContentLoaded', function() {
+  var homeImg = document.querySelector('.home-img');
+  homeImg.classList.add('animates');
+});
+
+
 // Sendmail function
 
 function sendMail(event) {
